@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include <gdk/gdkx.h>
 
 #include "screenshooter-utils.h"
-#include <libxfce4ui/libxfce4ui.h>
+#include <libexpidus1ui/libexpidus1ui.h>
 
 
 
@@ -114,7 +114,7 @@ screenshooter_read_rc_file (const gchar *file, ScreenshotData *sd)
 {
   const gchar *default_uri = screenshooter_get_xdg_image_dir_uri ();
 
-  XfceRc *rc;
+  ExpidusRc *rc;
   gint delay = 0;
   gint region = FULLSCREEN;
   gint action = SAVE;
@@ -130,36 +130,36 @@ screenshooter_read_rc_file (const gchar *file, ScreenshotData *sd)
     {
       TRACE ("Open the rc file");
 
-      rc = xfce_rc_simple_open (file, TRUE);
+      rc = expidus_rc_simple_open (file, TRUE);
 
       if (G_LIKELY (rc != NULL))
         {
           TRACE ("Read the entries");
 
-          delay = xfce_rc_read_int_entry (rc, "delay", 0);
-          region = xfce_rc_read_int_entry (rc, "region", FULLSCREEN);
-          action = xfce_rc_read_int_entry (rc, "action", SAVE);
-          show_mouse = xfce_rc_read_int_entry (rc, "show_mouse", 1);
-          timestamp = xfce_rc_read_bool_entry (rc, "timestamp", TRUE);
-          enable_imgur_upload = xfce_rc_read_bool_entry (rc, "enable_imgur_upload", TRUE);
+          delay = expidus_rc_read_int_entry (rc, "delay", 0);
+          region = expidus_rc_read_int_entry (rc, "region", FULLSCREEN);
+          action = expidus_rc_read_int_entry (rc, "action", SAVE);
+          show_mouse = expidus_rc_read_int_entry (rc, "show_mouse", 1);
+          timestamp = expidus_rc_read_bool_entry (rc, "timestamp", TRUE);
+          enable_imgur_upload = expidus_rc_read_bool_entry (rc, "enable_imgur_upload", TRUE);
 
           g_free (app);
-          app = g_strdup (xfce_rc_read_entry (rc, "app", "none"));
+          app = g_strdup (expidus_rc_read_entry (rc, "app", "none"));
 
           g_free (last_user);
-          last_user = g_strdup (xfce_rc_read_entry (rc, "last_user", ""));
+          last_user = g_strdup (expidus_rc_read_entry (rc, "last_user", ""));
 
           g_free (screenshot_dir);
           screenshot_dir =
-            g_strdup (xfce_rc_read_entry (rc, "screenshot_dir", default_uri));
+            g_strdup (expidus_rc_read_entry (rc, "screenshot_dir", default_uri));
 
           g_free (title);
           title =
-            g_strdup (xfce_rc_read_entry (rc, "title", _("Screenshot")));
+            g_strdup (expidus_rc_read_entry (rc, "title", _("Screenshot")));
 
           TRACE ("Close the rc file");
 
-          xfce_rc_close (rc);
+          expidus_rc_close (rc);
         }
     }
 
@@ -188,39 +188,39 @@ screenshooter_read_rc_file (const gchar *file, ScreenshotData *sd)
 void
 screenshooter_write_rc_file (const gchar *file, ScreenshotData *sd)
 {
-  XfceRc *rc;
+  ExpidusRc *rc;
 
   g_return_if_fail (file != NULL);
 
   TRACE ("Open the rc file");
 
-  rc = xfce_rc_simple_open (file, FALSE);
+  rc = expidus_rc_simple_open (file, FALSE);
 
   g_return_if_fail (rc != NULL);
 
   TRACE ("Write the entries.");
 
-  xfce_rc_write_entry (rc, "app", sd->app);
-  xfce_rc_write_entry (rc, "last_user", sd->last_user);
-  xfce_rc_write_entry (rc, "screenshot_dir", sd->screenshot_dir);
-  xfce_rc_write_bool_entry (rc, "enable_imgur_upload", sd->enable_imgur_upload);
+  expidus_rc_write_entry (rc, "app", sd->app);
+  expidus_rc_write_entry (rc, "last_user", sd->last_user);
+  expidus_rc_write_entry (rc, "screenshot_dir", sd->screenshot_dir);
+  expidus_rc_write_bool_entry (rc, "enable_imgur_upload", sd->enable_imgur_upload);
 
   /* do not save if action was specified from cli */
   if (!sd->action_specified)
   {
-    xfce_rc_write_int_entry (rc, "action", sd->action);
+    expidus_rc_write_int_entry (rc, "action", sd->action);
   }
 
   /* do not save if region was specified from cli */
   if (!sd->region_specified)
   {
-    xfce_rc_write_int_entry (rc, "delay", sd->delay);
-    xfce_rc_write_int_entry (rc, "region", sd->region);
-    xfce_rc_write_int_entry (rc, "show_mouse", sd->show_mouse);
+    expidus_rc_write_int_entry (rc, "delay", sd->delay);
+    expidus_rc_write_int_entry (rc, "region", sd->region);
+    expidus_rc_write_int_entry (rc, "show_mouse", sd->show_mouse);
   }
 
   TRACE ("Flush and close the rc file");
-  xfce_rc_close (rc);
+  expidus_rc_close (rc);
 }
 
 
@@ -378,7 +378,7 @@ gchar *screenshooter_get_datetime (const gchar *format)
 
 void screenshooter_open_help (GtkWindow *parent)
 {
-  xfce_dialog_show_help (parent, "screenshooter", "start", "");
+  expidus_dialog_show_help (parent, "screenshooter", "start", "");
 }
 
 
@@ -404,8 +404,8 @@ screenshooter_f1_key (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 void
 screenshooter_get_screen_geometry (GdkRectangle *geometry)
 {
-#if LIBXFCE4UI_CHECK_VERSION (4,14,0)
-  GdkRectangle *geometry2 = xfce_gdk_screen_get_geometry ();
+#if LIBEXPIDUS1UI_CHECK_VERSION (4,14,0)
+  GdkRectangle *geometry2 = expidus_gdk_screen_get_geometry ();
   geometry->width = geometry2->width;
   geometry->height = geometry2->height;
   g_free (geometry2);
@@ -506,8 +506,8 @@ gboolean
 screenshooter_get_gtk_frame_extents (GdkWindow *window,
                                      GtkBorder *extents)
 {
-#if LIBXFCE4UI_CHECK_VERSION (4,16,0)
-  return xfce_has_gtk_frame_extents (window, extents);
+#if LIBEXPIDUS1UI_CHECK_VERSION (4,16,0)
+  return expidus_has_gtk_frame_extents (window, extents);
 #else
   /* Code adapted from gnome-flashback:
    * Copyright (C) 2015-2017 Alberts Muktupāvels

@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright 2008-2009 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright 2008-2009 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,14 +40,14 @@ create_spinner_dialog              (const gchar        *title,
                                     GtkWidget          **label);
 
 void
-cb_error                           (ExoJob            *job,
+cb_error                           (EndoJob            *job,
                                     GError            *error,
                                     GtkWidget         *dialog);
 void
-cb_finished                        (ExoJob            *job,
+cb_finished                        (EndoJob            *job,
                                     GtkWidget         *dialog);
 void
-cb_update_info                     (ExoJob            *job,
+cb_update_info                     (EndoJob            *job,
                                     gchar             *message,
                                     GtkWidget         *label);
 void

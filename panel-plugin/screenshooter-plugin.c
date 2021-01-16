@@ -2,9 +2,9 @@
  *
  *  Copyright © 2004 German Poo-Caaman~o <gpoo@ubiobio.cl>
  *  Copyright © 2005,2006 Daniel Bobadilla Leal <dbobadil@dcc.uchile.cl>
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright © 2005 Jasper Huijsmans <jasper@expidus.org>
  *  Copyright © 2006 Jani Monoses <jani@ubuntu.com>
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ t */
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/libxfce4panel.h>
+#include <libexpidus1ui/libexpidus1ui.h>
+#include <libexpidus1panel/libexpidus1panel.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -37,12 +37,12 @@ t */
 
 #include "libscreenshooter.h"
 
-#define SCREENSHOT_ICON_NAME  "org.xfce.screenshooter"
+#define SCREENSHOT_ICON_NAME  "com.expidus.screenshooter"
 
 /* Struct containing all panel plugin data */
 typedef struct
 {
-  XfcePanelPlugin *plugin;
+  ExpidusPanelPlugin *plugin;
 
   GtkWidget *button;
   GtkWidget *image;
@@ -57,23 +57,23 @@ PluginData;
 /* Protoypes */
 
 static void
-screenshooter_plugin_construct       (XfcePanelPlugin      *plugin);
+screenshooter_plugin_construct       (ExpidusPanelPlugin      *plugin);
 
 static void
-screenshooter_plugin_read_rc_file    (XfcePanelPlugin      *plugin,
+screenshooter_plugin_read_rc_file    (ExpidusPanelPlugin      *plugin,
                                       PluginData           *pd);
 
 static void
-screenshooter_plugin_write_rc_file   (XfcePanelPlugin      *plugin,
+screenshooter_plugin_write_rc_file   (ExpidusPanelPlugin      *plugin,
                                       PluginData           *pd);
 
 static gboolean
-cb_set_size                          (XfcePanelPlugin      *plugin,
+cb_set_size                          (ExpidusPanelPlugin      *plugin,
                                       int                   size,
                                       PluginData           *pd);
 
 static void
-cb_properties_dialog                 (XfcePanelPlugin      *plugin,
+cb_properties_dialog                 (ExpidusPanelPlugin      *plugin,
                                       PluginData           *pd);
 
 static void
@@ -82,7 +82,7 @@ cb_dialog_response                   (GtkWidget            *dlg,
                                       PluginData           *pd);
 
 static void
-cb_free_data                         (XfcePanelPlugin      *plugin,
+cb_free_data                         (ExpidusPanelPlugin      *plugin,
                                       PluginData           *pd);
 
 static void
@@ -95,7 +95,7 @@ cb_button_scrolled                   (GtkWidget            *widget,
                                       PluginData *pd);
 
 static void
-cb_style_set                         (XfcePanelPlugin      *plugin,
+cb_style_set                         (ExpidusPanelPlugin      *plugin,
                                       gpointer              ignored,
                                       PluginData           *pd);
 
@@ -108,16 +108,16 @@ set_panel_button_tooltip             (PluginData           *pd);
 
 /* Returns a preferred icon size */
 static gint
-get_preferred_icon_size (XfcePanelPlugin *plugin)
+get_preferred_icon_size (ExpidusPanelPlugin *plugin)
 {
-#if LIBXFCE4PANEL_CHECK_VERSION (4,13,0)
+#if LIBEXPIDUS1PANEL_CHECK_VERSION (4,13,0)
   g_printf ("using 4.13\n");
-  return xfce_panel_plugin_get_icon_size (plugin);
+  return expidus_panel_plugin_get_icon_size (plugin);
 #else
   /* fall-back for older panel versions */
   g_printf ("using 4.12\n");
   gint width;
-  width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);
+  width = expidus_panel_plugin_get_size (plugin) / expidus_panel_plugin_get_nrows (plugin);
 
   if (width <= 27)
     return 16;
@@ -136,12 +136,12 @@ get_preferred_icon_size (XfcePanelPlugin *plugin)
 Returns TRUE if succesful.
 */
 static gboolean
-cb_set_size (XfcePanelPlugin *plugin, int size, PluginData *pd)
+cb_set_size (ExpidusPanelPlugin *plugin, int size, PluginData *pd)
 {
   gint icon_size;
 
   /* reduce the size of the plugin to a single row */
-  size /= xfce_panel_plugin_get_nrows (plugin);
+  size /= expidus_panel_plugin_get_nrows (plugin);
 
   TRACE ("Request size for the plugin");
   gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
@@ -155,11 +155,11 @@ cb_set_size (XfcePanelPlugin *plugin, int size, PluginData *pd)
 
 
 /* Free the panel plugin data stored in pd
-plugin: a XfcePanelPlugin (a screenshooter one).
+plugin: a ExpidusPanelPlugin (a screenshooter one).
 pd: the associated PluginData.
 */
 static void
-cb_free_data (XfcePanelPlugin *plugin, PluginData *pd)
+cb_free_data (ExpidusPanelPlugin *plugin, PluginData *pd)
 {
   if (pd->style_id)
     g_signal_handler_disconnect (plugin, pd->style_id);
@@ -228,25 +228,25 @@ static gboolean cb_button_scrolled (GtkWidget *widget,
 
 
 /* Set the style of the panel plugin.
-plugin: a XfcePanelPlugin (a screenshooter one).
+plugin: a ExpidusPanelPlugin (a screenshooter one).
 pd: the associated PluginData.
 */
 static void
-cb_style_set (XfcePanelPlugin *plugin, gpointer ignored, PluginData *pd)
+cb_style_set (ExpidusPanelPlugin *plugin, gpointer ignored, PluginData *pd)
 {
-  cb_set_size (plugin, xfce_panel_plugin_get_size (plugin), pd);
+  cb_set_size (plugin, expidus_panel_plugin_get_size (plugin), pd);
 }
 
 
 
 /* Read the rc file associated to the panel plugin and store the options in pd.
-plugin: a XfcePanelPlugin (a screenshooter one).
+plugin: a ExpidusPanelPlugin (a screenshooter one).
 pd: the associated PluginData.
 */
 static void
-screenshooter_plugin_read_rc_file (XfcePanelPlugin *plugin, PluginData *pd)
+screenshooter_plugin_read_rc_file (ExpidusPanelPlugin *plugin, PluginData *pd)
 {
-  gchar *rc_file = xfce_panel_plugin_lookup_rc_file (plugin);
+  gchar *rc_file = expidus_panel_plugin_lookup_rc_file (plugin);
 
   screenshooter_read_rc_file (rc_file, pd->sd);
   g_free (rc_file);
@@ -255,13 +255,13 @@ screenshooter_plugin_read_rc_file (XfcePanelPlugin *plugin, PluginData *pd)
 
 
 /* Write the pd options in the rc file associated to plugin
-plugin: a XfcePanelPlugin (a screenshooter one).
+plugin: a ExpidusPanelPlugin (a screenshooter one).
 pd: the associated PluginData.
 */
 static void
-screenshooter_plugin_write_rc_file (XfcePanelPlugin *plugin, PluginData *pd)
+screenshooter_plugin_write_rc_file (ExpidusPanelPlugin *plugin, PluginData *pd)
 {
-  gchar *rc_file = xfce_panel_plugin_save_location (plugin, TRUE);
+  gchar *rc_file = expidus_panel_plugin_save_location (plugin, TRUE);
 
   screenshooter_write_rc_file (rc_file, pd->sd);
   g_free (rc_file);
@@ -280,7 +280,7 @@ cb_dialog_response (GtkWidget *dlg, int response, PluginData *pd)
   gtk_widget_destroy (dlg);
 
   /* Unblock the menu */
-  xfce_panel_plugin_unblock_menu (pd->plugin);
+  expidus_panel_plugin_unblock_menu (pd->plugin);
 
   if (response == GTK_RESPONSE_OK)
     {
@@ -298,7 +298,7 @@ cb_dialog_response (GtkWidget *dlg, int response, PluginData *pd)
 
 /* Properties dialog to set the plugin options */
 static void
-cb_properties_dialog (XfcePanelPlugin *plugin, PluginData *pd)
+cb_properties_dialog (ExpidusPanelPlugin *plugin, PluginData *pd)
 {
   GtkWidget *dlg;
 
@@ -308,7 +308,7 @@ cb_properties_dialog (XfcePanelPlugin *plugin, PluginData *pd)
   /* Block the menu to prevent the user from launching several dialogs at
   the same time */
   TRACE ("Block the menu");
-  xfce_panel_plugin_block_menu (plugin);
+  expidus_panel_plugin_block_menu (plugin);
 
   TRACE ("Run the dialog");
   g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
@@ -348,7 +348,7 @@ set_panel_button_tooltip (PluginData *pd)
 
 /* Create the plugin button */
 static void
-screenshooter_plugin_construct (XfcePanelPlugin *plugin)
+screenshooter_plugin_construct (ExpidusPanelPlugin *plugin)
 {
   /* Initialise the data structs */
   GFile *default_save_dir;
@@ -362,10 +362,10 @@ screenshooter_plugin_construct (XfcePanelPlugin *plugin)
   pd->plugin = plugin;
 
   /* make the plugin fit a single row */
-  xfce_panel_plugin_set_small (plugin, TRUE);
+  expidus_panel_plugin_set_small (plugin, TRUE);
 
   TRACE ("Initialize the text domain");
-  xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+  expidus_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
   /* Read the options */
   TRACE ("Read the preferences file");
@@ -391,7 +391,7 @@ screenshooter_plugin_construct (XfcePanelPlugin *plugin)
 
   /* Create the panel button */
   TRACE ("Create the panel button");
-  pd->button = xfce_panel_create_button ();
+  pd->button = expidus_panel_create_button ();
 
   icon_size = get_preferred_icon_size (plugin);
   pd->image = gtk_image_new_from_icon_name (SCREENSHOT_ICON_NAME, icon_size);
@@ -404,7 +404,7 @@ screenshooter_plugin_construct (XfcePanelPlugin *plugin)
 
   TRACE ("Add the button to the panel");
   gtk_container_add (GTK_CONTAINER (plugin), pd->button);
-  xfce_panel_plugin_add_action_widget (plugin, pd->button);
+  expidus_panel_plugin_add_action_widget (plugin, pd->button);
   gtk_widget_show_all (pd->button);
   gtk_widget_add_events (pd->button, GDK_SCROLL_MASK);
 
@@ -422,8 +422,8 @@ screenshooter_plugin_construct (XfcePanelPlugin *plugin)
                                    G_CALLBACK (cb_style_set), pd);
 
   /* Set the configuration menu */
-  xfce_panel_plugin_menu_show_configure (plugin);
+  expidus_panel_plugin_menu_show_configure (plugin);
   g_signal_connect (plugin, "configure-plugin",
                     G_CALLBACK (cb_properties_dialog), pd);
 }
-XFCE_PANEL_PLUGIN_REGISTER (screenshooter_plugin_construct);
+EXPIDUS_PANEL_PLUGIN_REGISTER (screenshooter_plugin_construct);

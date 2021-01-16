@@ -61,7 +61,7 @@ imgur_upload_job (ScreenshooterJob *job, GArray *param_values, GError **error)
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   g_object_set_data (G_OBJECT (job), "jobtype", "imgur");
-  if (exo_job_set_error_if_cancelled (EXO_JOB (job), error))
+  if (endo_job_set_error_if_cancelled (ENDO_JOB (job), error))
     return FALSE;
 
 
@@ -101,9 +101,9 @@ imgur_upload_job (ScreenshooterJob *job, GArray *param_values, GError **error)
   soup_multipart_append_form_string (mp, "title", title);
   msg = soup_form_request_new_from_multipart (upload_url, mp);
 
-  // for v3 API - key registered *only* for xfce4-screenshooter!
+  // for v3 API - key registered *only* for expidus1-screenshooter!
   soup_message_headers_append (msg->request_headers, "Authorization", "Client-ID 66ab680b597e293");
-  exo_job_info_message (EXO_JOB (job), _("Upload the screenshot..."));
+  endo_job_info_message (ENDO_JOB (job), _("Upload the screenshot..."));
   status = soup_session_send_message (session, msg);
 
   if (!SOUP_STATUS_IS_SUCCESSFUL (status))

@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -669,33 +669,33 @@ GtkWidget *screenshooter_region_dialog_new (ScreenshotData *sd, gboolean plugin)
   /* Create the dialog */
   if (plugin)
     {
-#if LIBXFCE4UI_CHECK_VERSION (4,14,0)
-      dlg = xfce_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
+#if LIBEXPIDUS1UI_CHECK_VERSION (4,14,0)
+      dlg = expidus_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
         NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
         "help-browser", _("_Help"), GTK_RESPONSE_HELP,
         "window-close", _("_Close"), GTK_RESPONSE_OK,
         NULL);
 #else
-      dlg = xfce_titled_dialog_new_with_buttons (_("Screenshot"),
+      dlg = expidus_titled_dialog_new_with_buttons (_("Screenshot"),
         NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
         "gtk-help", GTK_RESPONSE_HELP,
         "gtk-close", GTK_RESPONSE_OK,
         NULL);
 #endif
 
-      xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dlg), _("Preferences"));
+      expidus_titled_dialog_set_subtitle (EXPIDUS_TITLED_DIALOG (dlg), _("Preferences"));
     }
   else
     {
-#if LIBXFCE4UI_CHECK_VERSION (4,14,0)
-      dlg = xfce_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
+#if LIBEXPIDUS1UI_CHECK_VERSION (4,14,0)
+      dlg = expidus_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
         NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
         "help-browser", _("_Help"), GTK_RESPONSE_HELP,
         "", _("_Cancel"), GTK_RESPONSE_CANCEL,
         "", _("_OK"), GTK_RESPONSE_OK,
         NULL);
 #else
-      dlg = xfce_titled_dialog_new_with_buttons (_("Screenshot"),
+      dlg = expidus_titled_dialog_new_with_buttons (_("Screenshot"),
         NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
         "gtk-help", GTK_RESPONSE_HELP,
         "gtk-cancel", GTK_RESPONSE_CANCEL,
@@ -703,13 +703,13 @@ GtkWidget *screenshooter_region_dialog_new (ScreenshotData *sd, gboolean plugin)
         NULL);
 #endif
 
-      xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dlg), _("Take a screenshot"));
+      expidus_titled_dialog_set_subtitle (EXPIDUS_TITLED_DIALOG (dlg), _("Take a screenshot"));
     }
 
   gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 0);
-  gtk_window_set_icon_name (GTK_WINDOW (dlg), "org.xfce.screenshooter");
+  gtk_window_set_icon_name (GTK_WINDOW (dlg), "com.expidus.screenshooter");
   gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
   /* Create the main alignment for the dialog */
@@ -922,15 +922,15 @@ GtkWidget *screenshooter_actions_dialog_new (ScreenshotData *sd)
   GdkPixbuf *thumbnail;
   GdkCursor *cursor;
 
-#if LIBXFCE4UI_CHECK_VERSION (4,14,0)
-  dlg = xfce_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
+#if LIBEXPIDUS1UI_CHECK_VERSION (4,14,0)
+  dlg = expidus_titled_dialog_new_with_mixed_buttons (_("Screenshot"),
     NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
     "help-browser", _("_Help"), GTK_RESPONSE_HELP,
     "", _("_Cancel"), GTK_RESPONSE_CANCEL,
     "", _("_OK"), GTK_RESPONSE_OK,
     NULL);
 #else
-  dlg = xfce_titled_dialog_new_with_buttons (_("Screenshot"),
+  dlg = expidus_titled_dialog_new_with_buttons (_("Screenshot"),
     NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
     "gtk-help", GTK_RESPONSE_HELP,
     "gtk-cancel", GTK_RESPONSE_CANCEL,
@@ -938,12 +938,12 @@ GtkWidget *screenshooter_actions_dialog_new (ScreenshotData *sd)
     NULL);
 #endif
 
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dlg),
+  expidus_titled_dialog_set_subtitle (EXPIDUS_TITLED_DIALOG (dlg),
                                    _("Choose what to do with the screenshot"));
   gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 0);
-  gtk_window_set_icon_name (GTK_WINDOW (dlg), "org.xfce.screenshooter");
+  gtk_window_set_icon_name (GTK_WINDOW (dlg), "com.expidus.screenshooter");
   gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
   /* Create the main alignment for the dialog */
@@ -1187,7 +1187,7 @@ gchar
                                    GTK_RESPONSE_ACCEPT,
                                    NULL);
 
-    gtk_window_set_icon_name (GTK_WINDOW (chooser), "org.xfce.screenshooter");
+    gtk_window_set_icon_name (GTK_WINDOW (chooser), "com.expidus.screenshooter");
     gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (chooser),
                                                     TRUE);
     gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);

@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2009 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2009 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <libxfce4util/libxfce4util.h>
-#include <exo/exo.h>
+#include <libexpidus1util/libexpidus1util.h>
+#include <endo/endo.h>
 
 #include "screenshooter-marshal.h"
 
@@ -46,7 +46,7 @@ typedef struct _ScreenshooterJob        ScreenshooterJob;
 struct _ScreenshooterJobClass
 {
   /*< private >*/
-  ExoJobClass __parent__;
+  EndoJobClass __parent__;
 
   /*< public >*/
 
@@ -57,7 +57,7 @@ struct _ScreenshooterJobClass
 struct _ScreenshooterJob
 {
   /*< private >*/
-  ExoJob __parent__;
+  EndoJob __parent__;
 };
 
 GType screenshooter_job_get_type       (void) G_GNUC_CONST;

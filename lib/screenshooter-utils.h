@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2009 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2009 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,8 +31,8 @@
 #include <glib/gstdio.h>
 #include <time.h>
 
-#include <libxfce4util/libxfce4util.h>
-#include <libxfce4ui/libxfce4ui.h>
+#include <libexpidus1util/libexpidus1util.h>
+#include <libexpidus1ui/libexpidus1ui.h>
 
 
 

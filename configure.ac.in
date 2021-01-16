@@ -1,17 +1,17 @@
 dnl configure.ac
 dnl
-dnl xfce4-screenshooter
+dnl expidus1-screenshooter
 dnl
 
-m4_define([xfce4_screenshooter_version_major], [1])
-m4_define([xfce4_screenshooter_version_minor], [9])
-m4_define([xfce4_screenshooter_version_micro], [8])
-m4_define([xfce4_screenshooter_version_nano],  []) dnl leave this empty to have no nano version
-m4_define([xfce4_screenshooter_version_build], [@REVISION@])
-m4_define([xfce4_screenshooter_version_tag], [git])
-m4_define([xfce4_screenshooter_version], [xfce4_screenshooter_version_major().xfce4_screenshooter_version_minor().xfce4_screenshooter_version_micro()ifelse(xfce4_screenshooter_version_nano(), [], [], [.xfce4_screenshooter_version_nano()])ifelse(xfce4_screenshooter_version_tag(), [git], [xfce4_screenshooter_version_tag()-xfce4_screenshooter_version_build()], [xfce4_screenshooter_version_tag()])])
+m4_define([expidus1_screenshooter_version_major], [1])
+m4_define([expidus1_screenshooter_version_minor], [0])
+m4_define([expidus1_screenshooter_version_micro], [0])
+m4_define([expidus1_screenshooter_version_nano],  []) dnl leave this empty to have no nano version
+m4_define([expidus1_screenshooter_version_build], [@REVISION@])
+m4_define([expidus1_screenshooter_version_tag], [git])
+m4_define([expidus1_screenshooter_version], [expidus1_screenshooter_version_major().expidus1_screenshooter_version_minor().expidus1_screenshooter_version_micro()ifelse(expidus1_screenshooter_version_nano(), [], [], [.expidus1_screenshooter_version_nano()])ifelse(expidus1_screenshooter_version_tag(), [git], [expidus1_screenshooter_version_tag()-expidus1_screenshooter_version_build()], [expidus1_screenshooter_version_tag()])])
 
-AC_INIT([xfce4-screenshooter], [xfce4_screenshooter_version], [https://bugzilla.xfce.org/], [xfce4-screenshooter])
+AC_INIT([expidus1-screenshooter], [expidus1_screenshooter_version], [https://bugzilla.expidus.org/], [expidus1-screenshooter])
 AC_CONFIG_MACRO_DIRS([m4])
 dnl ***************************
 dnl *** Initialize automake ***
@@ -45,9 +45,9 @@ AC_HEADER_STDC
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.12.0])
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.12.0])
-XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.12.0])
+XDT_CHECK_PACKAGE([LIBEXPIDUS1PANEL], [libexpidus1panel-2.0], [1.0.0])
+XDT_CHECK_PACKAGE([LIBEXPIDUS1UTIL], [libexpidus1util-1.0], [1.0.0])
+XDT_CHECK_PACKAGE([LIBEXPIDUS1UI], [libexpidus1ui-2], [1.0.0])
 XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.42.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([GDK], [gdk-3.0], [3.22.0])
@@ -55,7 +55,7 @@ XDT_CHECK_PACKAGE([GDKX11], [gdk-x11-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.42.0])
 XDT_CHECK_PACKAGE([SOUP], [libsoup-2.4], [2.26.0])
 XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
-XDT_CHECK_PACKAGE([EXO], [exo-2], [0.12.0])
+XDT_CHECK_PACKAGE([ENDO], [endo-2], [1.0.0])
 XDT_CHECK_PACKAGE([LIBXEXT], [xext], [1.0.0])
 XDT_CHECK_OPTIONAL_PACKAGE([XFIXES], [xfixes], [4.0.0], [xfixes], [XFIXES extension support])
 XDT_CHECK_LIBX11()

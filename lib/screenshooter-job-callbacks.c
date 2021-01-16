@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -84,7 +84,7 @@ create_spinner_dialog             (const gchar        *title,
   return dialog;
 }
 
-void cb_error (ExoJob *job, GError *error, GtkWidget *dialog)
+void cb_error (EndoJob *job, GError *error, GtkWidget *dialog)
 {
   g_return_if_fail (error != NULL);
 
@@ -95,9 +95,9 @@ void cb_error (ExoJob *job, GError *error, GtkWidget *dialog)
 
 
 
-void cb_finished (ExoJob *job, GtkWidget *dialog)
+void cb_finished (EndoJob *job, GtkWidget *dialog)
 {
-  g_return_if_fail (EXO_IS_JOB (job));
+  g_return_if_fail (ENDO_IS_JOB (job));
   g_return_if_fail (GTK_IS_DIALOG (dialog));
 
   g_signal_handlers_disconnect_matched (job,
@@ -136,9 +136,9 @@ void cb_finished (ExoJob *job, GtkWidget *dialog)
 
 
 
-void cb_update_info (ExoJob *job, gchar *message, GtkWidget *label)
+void cb_update_info (EndoJob *job, gchar *message, GtkWidget *label)
 {
-  g_return_if_fail (EXO_IS_JOB (job));
+  g_return_if_fail (ENDO_IS_JOB (job));
   g_return_if_fail (GTK_IS_LABEL (label));
 
   gtk_label_set_text (GTK_LABEL (label), message);
@@ -168,7 +168,7 @@ cb_ask_for_information (ScreenshooterJob *job,
 
   /* Create the information dialog */
   dialog =
-    xfce_titled_dialog_new_with_buttons (_("Details about the screenshot"),
+    expidus_titled_dialog_new_with_buttons (_("Details about the screenshot"),
                                          NULL,
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          "gtk-cancel",
@@ -308,7 +308,7 @@ cb_ask_for_information (ScreenshooterJob *job,
 
   if (response == GTK_RESPONSE_CANCEL || response == GTK_RESPONSE_DELETE_EVENT)
     {
-      exo_job_cancel (EXO_JOB (job));
+      endo_job_cancel (ENDO_JOB (job));
     }
   else if (response == GTK_RESPONSE_OK)
     {

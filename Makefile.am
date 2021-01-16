@@ -5,7 +5,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = po
 
-bin_PROGRAMS = src/xfce4-screenshooter
+bin_PROGRAMS = src/expidus1-screenshooter
 
 distclean-local:
 	rm -rf *.cache *~
@@ -39,13 +39,13 @@ lib_libscreenshooter_la_SOURCES =	\
 lib_libscreenshooter_la_CFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_builddir)/lib \
-	@EXO_CFLAGS@ \
+	@ENDO_CFLAGS@ \
 	@GTK_CFLAGS@ \
 	@GDK_CFLAGS@ \
 	@GDKX11_CFLAGS@ \
 	@GLIB_CFLAGS@ \
-	@LIBXFCE4UTIL_CFLAGS@ \
-	@LIBXFCE4UI_CFLAGS@ \
+	@LIBEXPIDUS1UTIL_CFLAGS@ \
+	@LIBEXPIDUS1UI_CFLAGS@ \
 	@LIBXML_CFLAGS@ \
 	@SOUP_CFLAGS@ \
 	@LIBX11_CFLAGS@ \
@@ -54,12 +54,12 @@ lib_libscreenshooter_la_CFLAGS = \
 
 lib_libscreenshooter_la_LIBADD = \
 	-lm \
-	@EXO_LIBS@ \
+	@ENDO_LIBS@ \
 	@GTK_LIBS@ \
 	@GDK_LIBS@ \
 	@GDKX11_LIBS@ \
-	@LIBXFCE4UTIL_LIBS@ \
-	@LIBXFCE4UI_LIBS@ \
+	@LIBEXPIDUS1UTIL_LIBS@ \
+	@LIBEXPIDUS1UI_LIBS@ \
 	@GLIB_LIBS@ \
 	@SOUP_LIBS@ \
 	@LIBXML_LIBS@ \
@@ -95,24 +95,24 @@ lib/screenshooter-imgur-dialog_ui.h: lib/screenshooter-imgur-dialog.ui
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=screenshooter_imgur_dialog_ui $< >$@
 
 # Main application
-src_xfce4_screenshooter_CFLAGS = \
+src_expidus1_screenshooter_CFLAGS = \
 	-I$(top_srcdir)/lib/ \
 	-I$(top_builddir)/lib \
-	@EXO_CFLAGS@ \
+	@ENDO_CFLAGS@ \
 	@GTK_CFLAGS@ \
 	@GDK_CFLAGS@ \
 	@GDKX11_CFLAGS@ \
 	@GLIB_CFLAGS@ \
-	@LIBXFCE4UTIL_CFLAGS@ \
-	@LIBXFCE4UI_CFLAGS@ \
+	@LIBEXPIDUS1UTIL_CFLAGS@ \
+	@LIBEXPIDUS1UI_CFLAGS@ \
 	@GTHREAD_CFLAGS@ \
 	@SOUP_CFLAGS@ \
 	@LIBXML_CFLAGS@ \
 	@LIBX11_CFLAGS@ \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
-src_xfce4_screenshooter_LDFLAGS = \
-	@EXO_LIBS@ \
+src_expidus1_screenshooter_LDFLAGS = \
+	@ENDO_LIBS@ \
 	@GTK_LIBS@ \
 	@GDK_LIBS@ \
 	@GDKX11_LIBS@ \
@@ -122,27 +122,27 @@ src_xfce4_screenshooter_LDFLAGS = \
 	@LIBXML_LIBS@ \
 	@LIBX11_LIBS@ \
 	@LIBX11_LDFLAGS@ \
-	@LIBXFCE4UTIL_LIBS@ \
-	@LIBXFCE4UI_LIBS@
+	@LIBEXPIDUS1UTIL_LIBS@ \
+	@LIBEXPIDUS1UI_LIBS@
 
-src_xfce4_screenshooter_LDADD = lib/libscreenshooter.la
+src_expidus1_screenshooter_LDADD = lib/libscreenshooter.la
 
-src_xfce4_screenshooter_SOURCES = src/main.c
+src_expidus1_screenshooter_SOURCES = src/main.c
 
 # Manual file for the application
 if HAVE_HELP2MAN
-xfce4-screenshooter.1: src/xfce4-screenshooter
+expidus1-screenshooter.1: src/expidus1-screenshooter
 	$(HELP2MAN) -o $@ --no-info $<
 endif
 
 # Desktop file for the application
 app_desktopdir = $(datadir)/applications
-app_desktop_in_in_files = src/xfce4-screenshooter.desktop.in.in
+app_desktop_in_in_files = src/expidus1-screenshooter.desktop.in.in
 app_desktop_in_files = $(app_desktop_in_in_files:.desktop.in.in=.desktop.in)
 app_desktop_DATA = $(app_desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-src/xfce4-screenshooter.desktop.in: src/xfce4-screenshooter.desktop.in.in
+src/expidus1-screenshooter.desktop.in: src/expidus1-screenshooter.desktop.in.in
 	$(AM_V_GEN) ( \
 		$(MKDIR_P) $(dir $@); \
 		sed -e "s^@PLUGIN_PATH@^$(libexecdir)/applications^" \
@@ -150,7 +150,7 @@ src/xfce4-screenshooter.desktop.in: src/xfce4-screenshooter.desktop.in.in
 	)
 
 # Panel plugin
-plugindir = $(libdir)/xfce4/panel/plugins
+plugindir = $(libdir)/expidus1/panel/plugins
 plugin_LTLIBRARIES = panel-plugin/libscreenshooterplugin.la
 
 panel_plugin_libscreenshooterplugin_la_CFLAGS =	\
@@ -158,9 +158,9 @@ panel_plugin_libscreenshooterplugin_la_CFLAGS =	\
 	-I$(top_srcdir)	\
 	-I$(top_srcdir)/lib/	\
 	-I$(top_builddir)/lib/	\
-	@EXO_CFLAGS@ \
-	@LIBXFCE4PANEL_CFLAGS@ \
-	@LIBXFCE4UI_CFLAGS@ \
+	@ENDO_CFLAGS@ \
+	@LIBEXPIDUS1PANEL_CFLAGS@ \
+	@LIBEXPIDUS1UI_CFLAGS@ \
 	@GTHREAD_CFLAGS@ \
 	@LIBXML_CFLAGS@ \
 	@LIBX11_CFLAGS@ \
@@ -170,25 +170,25 @@ panel_plugin_libscreenshooterplugin_la_LDFLAGS = \
 	-avoid-version \
 	-module \
 	-no-undefined \
-	-export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
+	-export-symbols-regex '^expidus_panel_module_(preinit|init|construct)' \
 	$(PLATFORM_LDFLAGS)
 
 panel_plugin_libscreenshooterplugin_la_LIBADD = \
-	@EXO_LIBS@ \
-	@LIBXFCE4PANEL_LIBS@ \
+	@ENDO_LIBS@ \
+	@LIBEXPIDUS1PANEL_LIBS@ \
 	@GTHREAD_LIBS@ \
 	@SOUP_LIBS@ \
 	@LIBXML_LIBS@ \
 	@LIBX11_LIBS@ \
 	@LIBX11_LDFLAGS@ \
-	@LIBXFCE4UI_LIBS@ \
+	@LIBEXPIDUS1UI_LIBS@ \
 	lib/libscreenshooter.la
 
 panel_plugin_libscreenshooterplugin_la_SOURCES = \
 	panel-plugin/screenshooter-plugin.c
 
 # Panel plugin desktop file
-panel_desktopdir = $(datadir)/xfce4/panel/plugins
+panel_desktopdir = $(datadir)/expidus1/panel/plugins
 panel_desktop_in_files = panel-plugin/screenshooter.desktop.in
 panel_desktop_DATA = $(panel_desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
@@ -197,34 +197,34 @@ panel_desktop_DATA = $(panel_desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_XML_RULE@
 appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-appdata_in_files = src/xfce4-screenshooter.appdata.xml.in
+appdata_in_files = src/expidus1-screenshooter.appdata.xml.in
 
 
 # App icons
 
 # 16x16 icons
 16iconsdir = $(datadir)/icons/hicolor/16x16/apps
-16icons_DATA = icons/16x16/org.xfce.screenshooter.png
+16icons_DATA = icons/16x16/com.expidus.screenshooter.png
 
 # 24x24 icons
 24iconsdir = $(datadir)/icons/hicolor/24x24/apps
-24icons_DATA = icons/24x24/org.xfce.screenshooter.png
+24icons_DATA = icons/24x24/com.expidus.screenshooter.png
 
 # 32x32 icons
 32iconsdir = $(datadir)/icons/hicolor/32x32/apps
-32icons_DATA = icons/32x32/org.xfce.screenshooter.png
+32icons_DATA = icons/32x32/com.expidus.screenshooter.png
 
 # 48x48 icons
 48iconsdir = $(datadir)/icons/hicolor/48x48/apps
-48icons_DATA = icons/48x48/org.xfce.screenshooter.png
+48icons_DATA = icons/48x48/com.expidus.screenshooter.png
 
 # 128x128 icons
 128iconsdir = $(datadir)/icons/hicolor/128x128/apps
-128icons_DATA = icons/128x128/org.xfce.screenshooter.png
+128icons_DATA = icons/128x128/com.expidus.screenshooter.png
 
 # Scalable icons
 scaliconsdir = $(datadir)/icons/hicolor/scalable/apps
-scalicons_DATA = icons/scalable/org.xfce.screenshooter.svg
+scalicons_DATA = icons/scalable/com.expidus.screenshooter.svg
 
 # Update the icon cache
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
@@ -278,7 +278,7 @@ DISTCLEANFILES = \
 	$(app_desktop_DATA) $(app_desktop_in_files) \
 	$(panel_desktop_DATA) \
 	$(appdata_DATA) \
-	xfce4-screenshooter.1
+	expidus1-screenshooter.1
 
 # Man pages
-dist_man_MANS = xfce4-screenshooter.1
+dist_man_MANS = expidus1-screenshooter.1

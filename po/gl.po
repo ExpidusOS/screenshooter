@@ -7,12 +7,12 @@
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008-2009
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce Apps\n"
+"Project-Id-Version: Expidus Apps\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-02 00:46+0200\n"
 "PO-Revision-Date: 2020-10-03 15:00+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
-"Language-Team: Galician (http://www.transifex.com/xfce/xfce-apps/language/gl/)\n"
+"Language-Team: Galician (http://www.transifex.com/expidus/expidus-apps/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +40,7 @@ msgstr "<span weight=\"bold\" stretch=\"semiexpanded\">Vaise transferir a captur
 #: ../lib/screenshooter-dialogs.c:921 ../lib/screenshooter-dialogs.c:928
 #: ../lib/screenshooter-utils.c:124 ../lib/screenshooter-utils.c:156
 #: ../lib/screenshooter-imgur-dialog.c:128
-#: ../src/xfce4-screenshooter.desktop.in.in.h:1
+#: ../src/expidus1-screenshooter.desktop.in.in.h:1
 #: ../panel-plugin/screenshooter.desktop.in.h:1
 msgid "Screenshot"
 msgstr "Captura de pantalla"
@@ -385,13 +385,13 @@ msgid ""
 "Try %s --help to see a full list of available command line options.\n"
 msgstr "%s: %s\nExecute %s --help para ver unha lista completa das opcións de liña de ordes dispoñibles.\n"
 
-#: ../src/xfce4-screenshooter.desktop.in.in.h:2
+#: ../src/expidus1-screenshooter.desktop.in.in.h:2
 #: ../panel-plugin/screenshooter.desktop.in.h:2
 msgid ""
 "Take screenshots of the entire screen, of the active window or of a region"
 msgstr "Facer capturas de pantalla de toda a pantalla, da xanela activa ou dunha zona"
 
-#: ../src/xfce4-screenshooter.appdata.xml.in.h:1
+#: ../src/expidus1-screenshooter.appdata.xml.in.h:1
 msgid ""
 "Allows you to capture the entire screen, the active window or a selected "
 "region. You can set the delay that elapses before the screenshot is taken "

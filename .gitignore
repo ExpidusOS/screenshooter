@@ -36,10 +36,10 @@ Makefile
 /po/stamp-it
 /src/.dirstamp
 *.o
-/src/xfce4-screenshooter
-/src/xfce4-screenshooter.desktop*
+/src/expidus1-screenshooter
+/src/expidus1-screenshooter.desktop*
 /stamp-h1
-src/xfce4-screenshooter.appdata.xml
+src/expidus1-screenshooter.appdata.xml
 
 # UI header files generated using xdt-csource
 lib/*_ui.h

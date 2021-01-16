@@ -1,7 +1,7 @@
 /*  $Id$
  *
  *  Copyright © 2018 Arthur Jansen <arthurj155@gmail.com>
- *  Copyright © 2018 Andre Miranda <andreldm@xfce.org>
+ *  Copyright © 2018 Andre Miranda <andreldm@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@
 #include "screenshooter-imgur-dialog.h"
 #include "screenshooter-imgur-dialog_ui.h"
 
-#include <exo/exo.h>
-#include <libxfce4ui/libxfce4ui.h>
+#include <endo/endo.h>
+#include <libexpidus1ui/libexpidus1ui.h>
 
 
 
@@ -125,14 +125,14 @@ screenshooter_imgur_dialog_new (const gchar *upload_name,
                                          screenshooter_imgur_dialog_ui_length);
 
   // Setup window
-  self->window = xfce_titled_dialog_new_with_buttons (_("Screenshot"),
+  self->window = expidus_titled_dialog_new_with_buttons (_("Screenshot"),
                                                       NULL,
                                                       GTK_DIALOG_DESTROY_WITH_PARENT,
                                                       "gtk-close",
                                                       GTK_RESPONSE_CLOSE,
                                                       NULL);
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (self->window), _("Your uploaded image"));
-  gtk_window_set_icon_name (GTK_WINDOW (self->window), "org.xfce.screenshooter");
+  expidus_titled_dialog_set_subtitle (EXPIDUS_TITLED_DIALOG (self->window), _("Your uploaded image"));
+  gtk_window_set_icon_name (GTK_WINDOW (self->window), "com.expidus.screenshooter");
   gtk_window_set_default_size (GTK_WINDOW (self->window), 500, 330);
 
   // Add notebook widget to window
@@ -291,7 +291,7 @@ cb_link_view_in_browser (GtkWidget *widget, gpointer user_data)
 
   dialog = SCREENSHOOTER_IMGUR_DIALOG (user_data);
   link = gtk_entry_get_text (dialog->link_entry);
-  exo_execute_preferred_application ("WebBrowser", link, NULL, NULL, NULL);
+  endo_execute_preferred_application ("WebBrowser", link, NULL, NULL, NULL);
 }
 
 
@@ -397,5 +397,5 @@ cb_delete_link_view (GtkWidget *widget, gpointer user_data)
   g_return_if_fail (SCREENSHOOTER_IS_IMGUR_DIALOG (user_data));
 
   dialog = SCREENSHOOTER_IMGUR_DIALOG (user_data);
-  exo_execute_preferred_application ("WebBrowser", dialog->delete_link, NULL, NULL, NULL);
+  endo_execute_preferred_application ("WebBrowser", dialog->delete_link, NULL, NULL, NULL);
 }

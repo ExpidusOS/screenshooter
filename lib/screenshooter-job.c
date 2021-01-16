@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ static void  screenshooter_job_finalize   (GObject               *object);
 
 
 
-static ExoJobClass *screenshooter_job_parent_class;
+static EndoJobClass *screenshooter_job_parent_class;
 static guint        job_signals[LAST_SIGNAL];
 
 
@@ -55,7 +55,7 @@ screenshooter_job_get_type (void)
 
   if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-      type = g_type_register_static_simple (EXO_TYPE_JOB,
+      type = g_type_register_static_simple (ENDO_TYPE_JOB,
                                             "ScreenshooterJob",
                                             sizeof (ScreenshooterJobClass),
                                             (GClassInitFunc) screenshooter_job_class_init,
@@ -161,14 +161,14 @@ void screenshooter_job_ask_info (ScreenshooterJob *job,
   g_return_if_fail (GTK_IS_LIST_STORE (info));
   g_return_if_fail (format != NULL);
 
-  if (G_UNLIKELY (exo_job_is_cancelled (EXO_JOB (job))))
+  if (G_UNLIKELY (endo_job_is_cancelled (ENDO_JOB (job))))
     return;
 
   va_start (va_args, format);
   message = g_strdup_vprintf (format, va_args);
   va_end (va_args);
 
-  exo_job_emit (EXO_JOB (job), job_signals[ASK], 0, info, message);
+  endo_job_emit (ENDO_JOB (job), job_signals[ASK], 0, info, message);
 
   g_free (message);
 }
@@ -181,5 +181,5 @@ screenshooter_job_image_uploaded (ScreenshooterJob *job, const gchar *file_name,
   g_return_if_fail (SCREENSHOOTER_IS_JOB (job));
 
   TRACE ("Emit image-uploaded signal.");
-  exo_job_emit (EXO_JOB (job), job_signals[IMAGE_UPLOADED], 0, file_name, delete_hash);
+  endo_job_emit (ENDO_JOB (job), job_signals[IMAGE_UPLOADED], 0, file_name, delete_hash);
 }

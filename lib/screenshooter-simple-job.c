@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2009-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2009-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 static void     screenshooter_simple_job_class_init (ScreenshooterSimpleJobClass  *klass,
                                                      gpointer                      data);
 static void     screenshooter_simple_job_finalize   (GObject                      *object);
-static gboolean screenshooter_simple_job_execute    (ExoJob                       *job,
+static gboolean screenshooter_simple_job_execute    (EndoJob                       *job,
                                                      GError                      **error);
 
 
@@ -71,7 +71,7 @@ screenshooter_simple_job_class_init (ScreenshooterSimpleJobClass *klass,
                                      gpointer                     data)
 {
   GObjectClass *gobject_class;
-  ExoJobClass  *exojob_class;
+  EndoJobClass  *endojob_class;
 
   /* determine the parent type class */
   screenshooter_simple_job_parent_class = g_type_class_peek_parent (klass);
@@ -79,8 +79,8 @@ screenshooter_simple_job_class_init (ScreenshooterSimpleJobClass *klass,
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = screenshooter_simple_job_finalize;
 
-  exojob_class = EXO_JOB_CLASS (klass);
-  exojob_class->execute = screenshooter_simple_job_execute;
+  endojob_class = ENDO_JOB_CLASS (klass);
+  endojob_class->execute = screenshooter_simple_job_execute;
 }
 
 
@@ -99,7 +99,7 @@ screenshooter_simple_job_finalize (GObject *object)
 
 
 static gboolean
-screenshooter_simple_job_execute (ExoJob  *job,
+screenshooter_simple_job_execute (EndoJob  *job,
                            GError **error)
 {
   ScreenshooterSimpleJob *simple_job = SCREENSHOOTER_SIMPLE_JOB (job);
@@ -114,11 +114,11 @@ screenshooter_simple_job_execute (ExoJob  *job,
 
   if (!success)
     {
-      g_assert (err != NULL || exo_job_is_cancelled (job));
+      g_assert (err != NULL || endo_job_is_cancelled (job));
 
       /* set error if the job was cancelled. otherwise just propagate
        * the results of the processing function */
-      if (exo_job_set_error_if_cancelled (job, error))
+      if (endo_job_set_error_if_cancelled (job, error))
         {
           g_clear_error (&err);
         }
@@ -191,7 +191,7 @@ screenshooter_simple_job_launch (ScreenshooterSimpleJobFunc func,
   va_end (var_args);
 
   /* launch the job */
-  return SCREENSHOOTER_JOB (exo_job_launch (EXO_JOB (simple_job)));
+  return SCREENSHOOTER_JOB (endo_job_launch (ENDO_JOB (simple_job)));
 }
 
 

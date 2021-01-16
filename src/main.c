@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@xfce.org>
+ *  Copyright © 2008-2010 Jérôme Guelfucci <jeromeg@expidus.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -148,7 +148,7 @@ int main (int argc, char **argv)
   sd->app_info = NULL;
   sd->action = 0;
 
-  xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+  expidus_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
   /* Print a message to advise to use help when a non existing cli option is
   passed to the executable. */
@@ -235,7 +235,7 @@ int main (int argc, char **argv)
     }
 
   /* Read the preferences */
-  rc_file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, "xfce4/xfce4-screenshooter", TRUE);
+  rc_file = expidus_resource_save_location (EXPIDUS_RESOURCE_CONFIG, "expidus1/expidus1-screenshooter", TRUE);
   screenshooter_read_rc_file (rc_file, sd);
 
   /* Default to no action specified */

@@ -5,15 +5,15 @@
 # Translators:
 # cip <c1pr1an@tuta.io>, 2018
 # Igor Știrbu <igor.stirbu@gmail.com>, 2009
-# Mișu Moldovan <dumol@xfce.org>, 2011
+# Mișu Moldovan <dumol@expidus.org>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce Apps\n"
+"Project-Id-Version: Expidus Apps\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-02 00:46+0200\n"
 "PO-Revision-Date: 2020-10-01 22:46+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
-"Language-Team: Romanian (http://www.transifex.com/xfce/xfce-apps/language/ro/)\n"
+"Last-Translator: Expidus Bot <transifex@expidus.org>\n"
+"Language-Team: Romanian (http://www.transifex.com/expidus/expidus-apps/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr "<span weight=\"bold\" stretch=\"semiexpanded\">Captura de ecran este tra
 #: ../lib/screenshooter-dialogs.c:921 ../lib/screenshooter-dialogs.c:928
 #: ../lib/screenshooter-utils.c:124 ../lib/screenshooter-utils.c:156
 #: ../lib/screenshooter-imgur-dialog.c:128
-#: ../src/xfce4-screenshooter.desktop.in.in.h:1
+#: ../src/expidus1-screenshooter.desktop.in.in.h:1
 #: ../panel-plugin/screenshooter.desktop.in.h:1
 msgid "Screenshot"
 msgstr "Captură de ecran"
@@ -386,13 +386,13 @@ msgid ""
 "Try %s --help to see a full list of available command line options.\n"
 msgstr "%s: %s\nÎncercați %s --help pentru a vedea întreaga listă de opțiuni în linie de comandă.\n"
 
-#: ../src/xfce4-screenshooter.desktop.in.in.h:2
+#: ../src/expidus1-screenshooter.desktop.in.in.h:2
 #: ../panel-plugin/screenshooter.desktop.in.h:2
 msgid ""
 "Take screenshots of the entire screen, of the active window or of a region"
 msgstr "Faceți capturi ale întregului ecran, a ferestrei active sau a unei regiuni"
 
-#: ../src/xfce4-screenshooter.appdata.xml.in.h:1
+#: ../src/expidus1-screenshooter.appdata.xml.in.h:1
 msgid ""
 "Allows you to capture the entire screen, the active window or a selected "
 "region. You can set the delay that elapses before the screenshot is taken "

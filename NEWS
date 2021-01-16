@@ -13,7 +13,7 @@
 - Fix screenshot capture when scale > 1
 - Add new App icon and switch to rDNS icon name
 - Switch to README.md and foreign automake mode
-- Bug #16717: Move from exo-csource to xdt-csource
+- Bug #16717: Move from endo-csource to xdt-csource
 - Update homepage link at appdata.xml
 - Translation Updates:
   Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, Bulgarian,
@@ -33,7 +33,7 @@
 - Fix cursor capture when near screen edge (Bug #9262)
 - Improve wording (Bug #15429)
 - Allow compilation with panel 4.15
-- Restore libxfce4ui 4.12 compatibility
+- Restore libexpidus1ui 4.12 compatibility
 - Translation Updates: Basque, Bulgarian, Catalan, Chinese (China),
   Chinese (Taiwan), Danish, Dutch, English (United Kingdom), French, German,
   Greek, Hungarian, Korean, Lithuanian, Malay, Norwegian Bokmål, Polish,
@@ -45,12 +45,12 @@
 - Avoid destroying size window twice (Bug #15792)
 - Replace GtkStock buttons
 - Add missing NULL as last parameter of
-  xfce_titled_dialog_new_with_buttons() (Bug #14973)
+  expidus_titled_dialog_new_with_buttons() (Bug #14973)
 - Do not use root coordinates for region capture (Bug #15406)
 - Install AppData into metainfo
 - Update AppData file
 - Try to grab seat more than once (Bug #15320)
-- Use new xfce_gdk_screen_get_geometry if available
+- Use new expidus_gdk_screen_get_geometry if available
 - Make screenshooter-imgur-dialog.ui translatable (Bug #15254)
 - Translation Updates: Albanian, Arabic, Asturian, Basque, Belarusian,
   Bulgarian, Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech,
@@ -107,7 +107,7 @@
 === Version 1.9.0 ===
 
   * Enhancements:
-    - Downgrade xfce4-panel dependency to 4.12
+    - Downgrade expidus1-panel dependency to 4.12
     - Updated translations (thanks to translators!)
 
   * Bugs fixed:
@@ -143,7 +143,7 @@
 === Version 1.8.1 ===
 
   * Enhancements:
-    - Adapting the panel plugin to xfce4-panel 4.9+. Andrzej.
+    - Adapting the panel plugin to expidus1-panel 4.9+. Andrzej.
     - Add a clipboard CLI option (bug #8483). Tom Hope.
     - Panel plugin is now built as a library.
 
@@ -153,7 +153,7 @@
     - Install documentation to new location (bug #8116).
     - Drop AC_PROG_LIBTOOL in favor of LT_PREREQ and LT_INIT.
     - Add explicit -lm link to LIBADD (bug #8230).
-    - Plugin installation location compatible with xfce4-panel 4.9+.
+    - Plugin installation location compatible with expidus1-panel 4.9+.
     - Update outdated man page.
 
   * Updated translations: Arabic, Brazilian, Bulgarian, Chinese, Czech,
@@ -163,8 +163,8 @@
 
 === Version 1.8.0 ===
 
-  * Gtk 2.16, libxfce4ui and exo are now required.
-  * Xfce4 Screenshooter does not depend anymore on libxfcegui4.
+  * Gtk 2.16, libexpidus1ui and endo are now required.
+  * Expidus1 Screenshooter does not depend anymore on libexpidusgui4.
 
   * Enhancements:
     - Capture the cursor using XFIXES (bug #7567).
@@ -172,7 +172,7 @@
 
 
   * Bugs fixed:
-    - Fix build with Xfce's master branch.
+    - Fix build with Expidus's master branch.
     - Remove obsolote 'hide' CLI option from the manpage.
     - Use new GtkLabel link instead of SexyUrlLabel.
     - Plug massive leak when cancelling in actions dialog.
@@ -230,7 +230,7 @@
     - Don't show the copy to clipboard option in the application if no
       clipboard manager is running as the screenshot won't be preserved
       after closing the application anyway in that case.
-    - Allow xfce4-screenshooter -r to be used as a command for a keybinding.
+    - Allow expidus1-screenshooter -r to be used as a command for a keybinding.
     - Allow silent build.
     - Fix most pre-build warnings.
     - Escape screenshots path when opening them with an application.
@@ -244,7 +244,7 @@
       on the screenshot in some cases.
 
   * A lot of updated translations for the application, the panel plugin and the
-    documentation. Thanks to the Xfce translation team!
+    documentation. Thanks to the Expidus translation team!
 
 === Version 1.6.0 ===
 
@@ -303,14 +303,14 @@
 
 === Version 1.4.90 ===
 
-  The application is now named "Xfce4 Screenshooter", the adress of the
+  The application is now named "Expidus1 Screenshooter", the adress of the
   SVN trunk has changed and the one of the website too. See the README
-  file. xfce4-panel dependency has been bumped to >= 4.4.
+  file. expidus1-panel dependency has been bumped to >= 4.4.
 
   * Bugfixes:
     - correctly grab active windows. In particular, menus are grabbed
       now (bug #4611).
-    - correctly save the preferences, even if ~/.config/xfce4 does
+    - correctly save the preferences, even if ~/.config/expidus1 does
       not exist. Thanks to Nick Schermer for the explanations.
     - when saving the screenshot fails, show an error dialog
       explaning why it failed.
