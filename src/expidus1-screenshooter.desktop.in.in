@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+_Name=Screenshot
+_Comment=Take screenshots of the entire screen, of the active window or of a region
+Icon=com.expidus.screenshooter
+Exec=expidus1-screenshooter
+Type=Application
+StartupNotify=true
+Terminal=false
+Categories=GTK;Utility;
